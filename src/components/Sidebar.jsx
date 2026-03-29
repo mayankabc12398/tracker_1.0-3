@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   LayoutDashboard,
   ListChecks,
@@ -7,21 +7,17 @@ import {
   BookOpen,
   X,
   Sparkles,
-} from 'lucide-react'
-import { cn } from '../lib/utils'
-
-interface SidebarProps {
-  onClose?: () => void
-}
+} from "lucide-react";
+import { cn } from "../lib/utils";
 
 const navItems = [
-  { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/habits', icon: ListChecks, label: 'Habits' },
-  { to: '/topics', icon: BookOpen, label: 'Topics' },
-  { to: '/settings', icon: Settings, label: 'Settings' },
-]
+  { to: "/", icon: LayoutDashboard, label: "Dashboard" },
+  { to: "/habits", icon: ListChecks, label: "Habits" },
+  { to: "/topics", icon: BookOpen, label: "Topics" },
+  { to: "/settings", icon: Settings, label: "Settings" },
+];
 
-export function Sidebar({ onClose }: SidebarProps) {
+export function Sidebar({ onClose }) {
   return (
     <div className="flex h-full flex-col bg-sidebar border-r border-sidebar-border">
       {/* Logo */}
@@ -53,10 +49,10 @@ export function Sidebar({ onClose }: SidebarProps) {
             onClick={onClose}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
                 isActive
-                  ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-                  : 'text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent'
+                  ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                  : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent",
               )
             }
           >
@@ -88,5 +84,5 @@ export function Sidebar({ onClose }: SidebarProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

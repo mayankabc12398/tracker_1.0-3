@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 import {
   CheckCircle2,
   Circle,
@@ -12,31 +12,22 @@ import {
   Droplet,
   Code,
   ClipboardCheck,
-} from 'lucide-react'
-import type { Habit } from '../types'
-import { cn } from '../lib/utils'
-import { useState } from 'react'
+} from "lucide-react";
+import { cn } from "../lib/utils";
+import { useState } from "react";
 
-interface HabitCardProps {
-  habit: Habit
-  onToggle: () => void
-  onEdit: () => void
-  onDelete: () => void
-  delay?: number
-}
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+const iconMap = {
   brain: Brain,
-  'book-open': BookOpen,
+  "book-open": BookOpen,
   dumbbell: Dumbbell,
   droplet: Droplet,
   code: Code,
-  'clipboard-check': ClipboardCheck,
-}
+  "clipboard-check": ClipboardCheck,
+};
 
-export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }: HabitCardProps) {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const IconComponent = iconMap[habit.icon] || Brain
+export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const IconComponent = iconMap[habit.icon] || Brain;
 
   return (
     <motion.div
@@ -46,10 +37,10 @@ export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }: Habi
       transition={{ duration: 0.3, delay }}
       whileHover={{ y: -2 }}
       className={cn(
-        'relative rounded-xl border p-4 transition-all',
+        "relative rounded-xl border p-4 transition-all",
         habit.completedToday
-          ? 'border-success/30 bg-success/5'
-          : 'border-border bg-card hover:border-primary/30'
+          ? "border-success/30 bg-success/5"
+          : "border-border bg-card hover:border-primary/30",
       )}
     >
       <div className="flex items-start gap-4">
@@ -62,7 +53,7 @@ export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }: Habi
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
             >
               <CheckCircle2 className="h-6 w-6 text-success" />
             </motion.div>
@@ -85,8 +76,8 @@ export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }: Habi
             </div>
             <h3
               className={cn(
-                'font-medium text-foreground truncate',
-                habit.completedToday && 'line-through text-muted-foreground'
+                "font-medium text-foreground truncate",
+                habit.completedToday && "line-through text-muted-foreground",
               )}
             >
               {habit.name}
@@ -126,6 +117,7 @@ export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }: Habi
                   className="fixed inset-0 z-40"
                   onClick={() => setMenuOpen(false)}
                 />
+
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -133,8 +125,8 @@ export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }: Habi
                 >
                   <button
                     onClick={() => {
-                      setMenuOpen(false)
-                      onEdit()
+                      setMenuOpen(false);
+                      onEdit();
                     }}
                     className="flex w-full items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-muted transition-colors"
                   >
@@ -143,8 +135,8 @@ export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }: Habi
                   </button>
                   <button
                     onClick={() => {
-                      setMenuOpen(false)
-                      onDelete()
+                      setMenuOpen(false);
+                      onDelete();
                     }}
                     className="flex w-full items-center gap-2 px-3 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors"
                   >
@@ -158,5 +150,5 @@ export function HabitCard({ habit, onToggle, onEdit, onDelete, delay = 0 }: Habi
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

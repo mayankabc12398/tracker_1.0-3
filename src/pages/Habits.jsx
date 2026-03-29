@@ -1,61 +1,59 @@
-import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, ListChecks, Filter } from 'lucide-react'
-import { useHabits } from '../context/HabitContext'
-import { HabitCard } from '../components/HabitCard'
-import { HabitFormModal } from '../components/HabitFormModal'
-import { ConfirmDialog } from '../components/ConfirmDialog'
-import { SearchInput } from '../components/SearchInput'
-import { EmptyState } from '../components/EmptyState'
-import type { Habit } from '../types'
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, ListChecks, Filter } from "lucide-react";
+import { useHabits } from "../context/HabitContext";
+import { HabitCard } from "../components/HabitCard";
+import { HabitFormModal } from "../components/HabitFormModal";
+import { ConfirmDialog } from "../components/ConfirmDialog";
+import { SearchInput } from "../components/SearchInput";
+import { EmptyState } from "../components/EmptyState";
 
-const filterOptions = ['All', 'Completed', 'Pending'] as const
-type FilterType = typeof filterOptions[number]
+const filterOptions = ["All", "Completed", "Pending"];
 
 export default function Habits() {
-  const { habits, addHabit, updateHabit, deleteHabit, toggleHabitCompletion } = useHabits()
-  
-  const [search, setSearch] = useState('')
-  const [filter, setFilter] = useState<FilterType>('All')
-  const [isFormOpen, setIsFormOpen] = useState(false)
-  const [editingHabit, setEditingHabit] = useState<Habit | null>(null)
-  const [deletingHabit, setDeletingHabit] = useState<Habit | null>(null)
+  const { habits, addHabit, updateHabit, deleteHabit, toggleHabitCompletion } =
+    useHabits();
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("All");
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingHabit, setEditingHabit] = useState(null);
+  const [deletingHabit, setDeletingHabit] = useState(null);
 
   const filteredHabits = useMemo(() => {
     return habits.filter((habit) => {
-      const matchesSearch = habit.name.toLowerCase().includes(search.toLowerCase()) ||
-        habit.category.toLowerCase().includes(search.toLowerCase())
-      
-      if (filter === 'Completed') return matchesSearch && habit.completedToday
-      if (filter === 'Pending') return matchesSearch && !habit.completedToday
-      return matchesSearch
-    })
-  }, [habits, search, filter])
+      const matchesSearch =
+        habit.name.toLowerCase().includes(search.toLowerCase()) ||
+        habit.category.toLowerCase().includes(search.toLowerCase());
+      if (filter === "Completed") return matchesSearch && habit.completedToday;
+      if (filter === "Pending") return matchesSearch && !habit.completedToday;
+      return matchesSearch;
+    });
+  }, [habits, search, filter]);
 
-  const handleSubmit = (habitData: Omit<Habit, 'id' | 'createdAt' | 'completedDates' | 'completedToday' | 'streak'>) => {
+  const handleSubmit = (habitData) => {
     if (editingHabit) {
-      updateHabit(editingHabit.id, habitData)
+      updateHabit(editingHabit.id, habitData);
     } else {
-      addHabit(habitData)
+      addHabit(habitData);
     }
-    setEditingHabit(null)
-  }
+    setEditingHabit(null);
+  };
 
-  const handleEdit = (habit: Habit) => {
-    setEditingHabit(habit)
-    setIsFormOpen(true)
-  }
+  const handleEdit = (habit) => {
+    setEditingHabit(habit);
+    setIsFormOpen(true);
+  };
 
-  const handleDelete = (habit: Habit) => {
-    setDeletingHabit(habit)
-  }
+  const handleDelete = (habit) => {
+    setDeletingHabit(habit);
+  };
 
   const confirmDelete = () => {
     if (deletingHabit) {
-      deleteHabit(deletingHabit.id)
-      setDeletingHabit(null)
+      deleteHabit(deletingHabit.id);
+      setDeletingHabit(null);
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -63,15 +61,15 @@ export default function Habits() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <p className="text-muted-foreground">
-            {habits.length} habit{habits.length !== 1 ? 's' : ''} tracked
+            {habits.length} habit{habits.length !== 1 ? "s" : ""} tracked
           </p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => {
-            setEditingHabit(null)
-            setIsFormOpen(true)
+            setEditingHabit(null);
+            setIsFormOpen(true);
           }}
           className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
         >
@@ -98,8 +96,8 @@ export default function Habits() {
                 onClick={() => setFilter(option)}
                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   filter === option
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {option}
@@ -116,7 +114,7 @@ export default function Habits() {
           title="No habits yet"
           description="Start building better routines by creating your first habit."
           action={{
-            label: 'Create your first habit',
+            label: "Create your first habit",
             onClick: () => setIsFormOpen(true),
           }}
         />
@@ -147,8 +145,8 @@ export default function Habits() {
       <HabitFormModal
         isOpen={isFormOpen}
         onClose={() => {
-          setIsFormOpen(false)
-          setEditingHabit(null)
+          setIsFormOpen(false);
+          setEditingHabit(null);
         }}
         onSubmit={handleSubmit}
         initialData={editingHabit}
@@ -162,5 +160,5 @@ export default function Habits() {
         description={`Are you sure you want to delete "${deletingHabit?.name}"? This action cannot be undone.`}
       />
     </div>
-  )
+  );
 }

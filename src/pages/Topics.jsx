@@ -1,37 +1,36 @@
-import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
-import { Eye, BookOpen } from 'lucide-react'
-import { seedTopics } from '../data/seedData'
-import { SearchInput } from '../components/SearchInput'
-import { EmptyState } from '../components/EmptyState'
-import { TopicDetailModal } from '../components/TopicDetailModal'
-import type { Topic } from '../types'
-import { cn } from '../lib/utils'
+import { useState, useMemo } from "react";
+import { motion } from "framer-motion";
+import { Eye, BookOpen } from "lucide-react";
+import { seedTopics } from "../data/seedData";
+import { SearchInput } from "../components/SearchInput";
+import { EmptyState } from "../components/EmptyState";
+import { TopicDetailModal } from "../components/TopicDetailModal";
+import { cn } from "../lib/utils";
 
 const difficultyColors = {
-  Beginner: 'bg-success/10 text-success',
-  Intermediate: 'bg-warning/10 text-warning',
-  Advanced: 'bg-destructive/10 text-destructive',
-}
+  Beginner: "bg-success/10 text-success",
+  Intermediate: "bg-warning/10 text-warning",
+  Advanced: "bg-destructive/10 text-destructive",
+};
 
 const statusColors = {
-  Active: 'bg-success/10 text-success',
-  Archived: 'bg-muted text-muted-foreground',
-  Draft: 'bg-info/10 text-info',
-}
+  Active: "bg-success/10 text-success",
+  Archived: "bg-muted text-muted-foreground",
+  Draft: "bg-info/10 text-info",
+};
 
 export default function Topics() {
-  const [search, setSearch] = useState('')
-  const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
+  const [search, setSearch] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
   const filteredTopics = useMemo(() => {
     return seedTopics.filter(
       (topic) =>
         topic.name.toLowerCase().includes(search.toLowerCase()) ||
         topic.category.toLowerCase().includes(search.toLowerCase()) ||
-        topic.difficulty.toLowerCase().includes(search.toLowerCase())
-    )
-  }, [search])
+        topic.difficulty.toLowerCase().includes(search.toLowerCase()),
+    );
+  }, [search]);
 
   return (
     <div className="space-y-6">
@@ -39,7 +38,8 @@ export default function Topics() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <p className="text-muted-foreground">
-            {seedTopics.length} topic{seedTopics.length !== 1 ? 's' : ''} available
+            {seedTopics.length} topic{seedTopics.length !== 1 ? "s" : ""}{" "}
+            available
           </p>
         </div>
         <div className="w-full sm:w-72">
@@ -104,7 +104,9 @@ export default function Topics() {
                           <BookOpen className="h-4 w-4 text-primary" />
                         </div>
                         <div>
-                          <p className="font-medium text-foreground">{topic.name}</p>
+                          <p className="font-medium text-foreground">
+                            {topic.name}
+                          </p>
                           <p className="text-xs text-muted-foreground truncate max-w-xs">
                             {topic.description}
                           </p>
@@ -112,13 +114,15 @@ export default function Topics() {
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-sm text-foreground">{topic.category}</span>
+                      <span className="text-sm text-foreground">
+                        {topic.category}
+                      </span>
                     </td>
                     <td className="px-5 py-4">
                       <span
                         className={cn(
-                          'px-2.5 py-1 rounded-full text-xs font-medium',
-                          difficultyColors[topic.difficulty]
+                          "px-2.5 py-1 rounded-full text-xs font-medium",
+                          difficultyColors[topic.difficulty],
                         )}
                       >
                         {topic.difficulty}
@@ -127,8 +131,8 @@ export default function Topics() {
                     <td className="px-5 py-4">
                       <span
                         className={cn(
-                          'px-2.5 py-1 rounded-full text-xs font-medium',
-                          statusColors[topic.status]
+                          "px-2.5 py-1 rounded-full text-xs font-medium",
+                          statusColors[topic.status],
                         )}
                       >
                         {topic.status}
@@ -170,23 +174,25 @@ export default function Topics() {
                       <BookOpen className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">{topic.name}</p>
+                      <p className="font-medium text-foreground">
+                        {topic.name}
+                      </p>
                       <p className="text-xs text-muted-foreground mt-0.5">
                         {topic.category}
                       </p>
                       <div className="flex items-center gap-2 mt-2">
                         <span
                           className={cn(
-                            'px-2 py-0.5 rounded-full text-xs font-medium',
-                            difficultyColors[topic.difficulty]
+                            "px-2 py-0.5 rounded-full text-xs font-medium",
+                            difficultyColors[topic.difficulty],
                           )}
                         >
                           {topic.difficulty}
                         </span>
                         <span
                           className={cn(
-                            'px-2 py-0.5 rounded-full text-xs font-medium',
-                            statusColors[topic.status]
+                            "px-2 py-0.5 rounded-full text-xs font-medium",
+                            statusColors[topic.status],
                           )}
                         >
                           {topic.status}
@@ -214,5 +220,5 @@ export default function Topics() {
         topic={selectedTopic}
       />
     </div>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-import { motion } from 'framer-motion'
-import { Bell, Moon, Sun, Clock, CalendarDays, Palette } from 'lucide-react'
-import { useTheme } from '../context/ThemeContext'
-import { useSettings } from '../context/SettingsContext'
-import { SettingsCard } from '../components/SettingsCard'
-import { Toggle } from '../components/Toggle'
+import { motion } from "framer-motion";
+import { Bell, Moon, Sun, Clock, CalendarDays, Palette } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
+import { useSettings } from "../context/SettingsContext";
+import { SettingsCard } from "../components/SettingsCard";
+import { Toggle } from "../components/Toggle";
 
 export default function Settings() {
-  const { theme, setTheme } = useTheme()
-  const { settings, updateSettings } = useSettings()
+  const { theme, setTheme } = useTheme();
+  const { settings, updateSettings } = useSettings();
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -21,7 +21,7 @@ export default function Settings() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              {theme === 'dark' ? (
+              {theme === "dark" ? (
                 <Moon className="h-5 w-5 text-muted-foreground" />
               ) : (
                 <Sun className="h-5 w-5 text-muted-foreground" />
@@ -29,8 +29,8 @@ export default function Settings() {
               <span className="text-sm text-foreground">Dark Mode</span>
             </div>
             <Toggle
-              checked={theme === 'dark'}
-              onChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+              checked={theme === "dark"}
+              onChange={(checked) => setTheme(checked ? "dark" : "light")}
             />
           </div>
 
@@ -39,35 +39,39 @@ export default function Settings() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => setTheme('light')}
+              onClick={() => setTheme("light")}
               className={`flex-1 p-4 rounded-lg border-2 transition-colors ${
-                theme === 'light'
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border bg-muted/50 hover:border-muted-foreground/30'
+                theme === "light"
+                  ? "border-primary bg-primary/5"
+                  : "border-border bg-muted/50 hover:border-muted-foreground/30"
               }`}
             >
               <div className="flex flex-col items-center gap-2">
                 <div className="h-8 w-8 rounded-full bg-white border border-gray-200 flex items-center justify-center">
                   <Sun className="h-4 w-4 text-amber-500" />
                 </div>
-                <span className="text-xs font-medium text-foreground">Light</span>
+                <span className="text-xs font-medium text-foreground">
+                  Light
+                </span>
               </div>
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => setTheme('dark')}
+              onClick={() => setTheme("dark")}
               className={`flex-1 p-4 rounded-lg border-2 transition-colors ${
-                theme === 'dark'
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border bg-muted/50 hover:border-muted-foreground/30'
+                theme === "dark"
+                  ? "border-primary bg-primary/5"
+                  : "border-border bg-muted/50 hover:border-muted-foreground/30"
               }`}
             >
               <div className="flex flex-col items-center gap-2">
                 <div className="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center">
                   <Moon className="h-4 w-4 text-slate-300" />
                 </div>
-                <span className="text-xs font-medium text-foreground">Dark</span>
+                <span className="text-xs font-medium text-foreground">
+                  Dark
+                </span>
               </div>
             </motion.button>
           </div>
@@ -98,7 +102,7 @@ export default function Settings() {
           {settings.notifications && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               className="flex items-center justify-between pt-2 border-t border-border"
             >
@@ -114,7 +118,9 @@ export default function Settings() {
               <input
                 type="time"
                 value={settings.reminderTime}
-                onChange={(e) => updateSettings({ reminderTime: e.target.value })}
+                onChange={(e) =>
+                  updateSettings({ reminderTime: e.target.value })
+                }
                 className="px-3 py-1.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </motion.div>
@@ -138,21 +144,21 @@ export default function Settings() {
           </div>
           <div className="flex rounded-lg border border-input bg-background p-1">
             <button
-              onClick={() => updateSettings({ weekStartsOn: 'sunday' })}
+              onClick={() => updateSettings({ weekStartsOn: "sunday" })}
               className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                settings.weekStartsOn === 'sunday'
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-muted-foreground hover:text-foreground'
+                settings.weekStartsOn === "sunday"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               Sunday
             </button>
             <button
-              onClick={() => updateSettings({ weekStartsOn: 'monday' })}
+              onClick={() => updateSettings({ weekStartsOn: "monday" })}
               className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                settings.weekStartsOn === 'monday'
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-muted-foreground hover:text-foreground'
+                settings.weekStartsOn === "monday"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               Monday
@@ -169,9 +175,10 @@ export default function Settings() {
         className="rounded-xl border border-border bg-muted/30 p-5"
       >
         <p className="text-sm text-muted-foreground">
-          Your data is stored locally in your browser. Clearing your browser data will remove all habits and settings.
+          Your data is stored locally in your browser. Clearing your browser
+          data will remove all habits and settings.
         </p>
       </motion.div>
     </div>
-  )
+  );
 }

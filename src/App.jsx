@@ -1,9 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
-import { AppLayout } from './layout/AppLayout'
-import Dashboard from './pages/Dashboard'
-import Habits from './pages/Habits'
-import Settings from './pages/Settings'
-import Topics from './pages/Topics'
+import { Routes, Route } from "react-router-dom";
+import { AppLayout } from "./layout/AppLayout";
+import Dashboard from "./pages/Dashboard";
+import Habits from "./pages/Habits";
+import Settings from "./pages/Settings";
+import Topics from "./pages/Topics";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="topics" element={<Topics />} />
       </Route>
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

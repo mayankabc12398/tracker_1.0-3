@@ -1,24 +1,19 @@
-import { motion } from 'framer-motion'
-
-interface ProgressRingProps {
-  progress: number
-  size?: number
-  strokeWidth?: number
-  className?: string
-}
+import { motion } from "framer-motion";
 
 export function ProgressRing({
   progress,
   size = 120,
   strokeWidth = 10,
-  className = '',
-}: ProgressRingProps) {
-  const radius = (size - strokeWidth) / 2
-  const circumference = radius * 2 * Math.PI
-  const offset = circumference - (progress / 100) * circumference
+  className = "",
+}) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = radius * 2 * Math.PI;
+  const offset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className={`relative inline-flex items-center justify-center ${className}`}>
+    <div
+      className={`relative inline-flex items-center justify-center ${className}`}
+    >
       <svg width={size} height={size} className="-rotate-90">
         {/* Background circle */}
         <circle
@@ -30,6 +25,7 @@ export function ProgressRing({
           strokeWidth={strokeWidth}
           className="text-muted/30"
         />
+
         {/* Progress circle */}
         <motion.circle
           cx={size / 2}
@@ -42,7 +38,7 @@ export function ProgressRing({
           className="text-primary"
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+          transition={{ duration: 1, ease: "easeOut" }}
           style={{
             strokeDasharray: circumference,
           }}
@@ -60,5 +56,5 @@ export function ProgressRing({
         <span className="text-xs text-muted-foreground">Complete</span>
       </div>
     </div>
-  )
+  );
 }

@@ -1,26 +1,22 @@
-import { useLocation } from 'react-router-dom'
-import { Menu, Moon, Sun, Bell } from 'lucide-react'
-import { motion } from 'framer-motion'
-import { useTheme } from '../context/ThemeContext'
-import { useSettings } from '../context/SettingsContext'
-import { cn } from '../lib/utils'
+import { useLocation } from "react-router-dom";
+import { Menu, Moon, Sun, Bell } from "lucide-react";
+import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
+import { useSettings } from "../context/SettingsContext";
+import { cn } from "../lib/utils";
 
-interface HeaderProps {
-  onMenuClick: () => void
-}
+const pageTitles = {
+  "/": "Dashboard",
+  "/habits": "Habits",
+  "/settings": "Settings",
+  "/topics": "Topics",
+};
 
-const pageTitles: Record<string, string> = {
-  '/': 'Dashboard',
-  '/habits': 'Habits',
-  '/settings': 'Settings',
-  '/topics': 'Topics',
-}
-
-export function Header({ onMenuClick }: HeaderProps) {
-  const location = useLocation()
-  const { theme, toggleTheme } = useTheme()
-  const { settings } = useSettings()
-  const pageTitle = pageTitles[location.pathname] || 'Dashboard'
+export function Header({ onMenuClick }) {
+  const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
+  const { settings } = useSettings();
+  const pageTitle = pageTitles[location.pathname] || "Dashboard";
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-border bg-background/80 backdrop-blur-sm px-4 md:px-6">
@@ -46,10 +42,10 @@ export function Header({ onMenuClick }: HeaderProps) {
         {/* Notifications */}
         <button
           className={cn(
-            'relative p-2 rounded-lg transition-colors',
+            "relative p-2 rounded-lg transition-colors",
             settings.notifications
-              ? 'hover:bg-accent text-foreground'
-              : 'text-muted-foreground'
+              ? "hover:bg-accent text-foreground"
+              : "text-muted-foreground",
           )}
         >
           <Bell className="h-5 w-5" />
@@ -65,10 +61,10 @@ export function Header({ onMenuClick }: HeaderProps) {
         >
           <motion.div
             initial={false}
-            animate={{ rotate: theme === 'dark' ? 180 : 0 }}
+            animate={{ rotate: theme === "dark" ? 180 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            {theme === 'dark' ? (
+            {theme === "dark" ? (
               <Moon className="h-5 w-5" />
             ) : (
               <Sun className="h-5 w-5" />
@@ -82,5 +78,5 @@ export function Header({ onMenuClick }: HeaderProps) {
         </div>
       </div>
     </header>
-  )
+  );
 }

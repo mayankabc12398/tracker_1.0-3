@@ -1,28 +1,21 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { X, BookOpen, Tag, BarChart3, Calendar } from 'lucide-react'
-import type { Topic } from '../types'
-import { cn } from '../lib/utils'
-
-interface TopicDetailModalProps {
-  isOpen: boolean
-  onClose: () => void
-  topic: Topic | null
-}
+import { motion, AnimatePresence } from "framer-motion";
+import { X, BookOpen, Tag, BarChart3, Calendar } from "lucide-react";
+import { cn } from "../lib/utils";
 
 const difficultyColors = {
-  Beginner: 'bg-success/10 text-success',
-  Intermediate: 'bg-warning/10 text-warning',
-  Advanced: 'bg-destructive/10 text-destructive',
-}
+  Beginner: "bg-success/10 text-success",
+  Intermediate: "bg-warning/10 text-warning",
+  Advanced: "bg-destructive/10 text-destructive",
+};
 
 const statusColors = {
-  Active: 'bg-success/10 text-success',
-  Archived: 'bg-muted text-muted-foreground',
-  Draft: 'bg-info/10 text-info',
-}
+  Active: "bg-success/10 text-success",
+  Archived: "bg-muted text-muted-foreground",
+  Draft: "bg-info/10 text-info",
+};
 
-export function TopicDetailModal({ isOpen, onClose, topic }: TopicDetailModalProps) {
-  if (!topic) return null
+export function TopicDetailModal({ isOpen, onClose, topic }) {
+  if (!topic) return null;
 
   return (
     <AnimatePresence>
@@ -35,11 +28,12 @@ export function TopicDetailModal({ isOpen, onClose, topic }: TopicDetailModalPro
             className="fixed inset-0 z-50 bg-black/50"
             onClick={onClose}
           />
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="fixed inset-x-4 top-[5%] bottom-[5%] z-50 mx-auto max-w-2xl rounded-xl border border-border bg-card shadow-xl overflow-hidden flex flex-col"
           >
             {/* Header */}
@@ -70,21 +64,37 @@ export function TopicDetailModal({ isOpen, onClose, topic }: TopicDetailModalPro
               <div className="flex items-center gap-2">
                 <Tag className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">Category:</span>
-                <span className="text-sm font-medium text-foreground">{topic.category}</span>
+                <span className="text-sm font-medium text-foreground">
+                  {topic.category}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <BarChart3 className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">Difficulty:</span>
-                <span className={cn('px-2 py-0.5 rounded-full text-xs font-medium', difficultyColors[topic.difficulty])}>
+                <span className="text-sm text-muted-foreground">
+                  Difficulty:
+                </span>
+                <span
+                  className={cn(
+                    "px-2 py-0.5 rounded-full text-xs font-medium",
+                    difficultyColors[topic.difficulty],
+                  )}
+                >
                   {topic.difficulty}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">Updated:</span>
-                <span className="text-sm font-medium text-foreground">{topic.updatedAt}</span>
+                <span className="text-sm font-medium text-foreground">
+                  {topic.updatedAt}
+                </span>
               </div>
-              <span className={cn('px-2 py-0.5 rounded-full text-xs font-medium', statusColors[topic.status])}>
+              <span
+                className={cn(
+                  "px-2 py-0.5 rounded-full text-xs font-medium",
+                  statusColors[topic.status],
+                )}
+              >
                 {topic.status}
               </span>
             </div>
@@ -92,8 +102,11 @@ export function TopicDetailModal({ isOpen, onClose, topic }: TopicDetailModalPro
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-5">
               <div className="prose prose-sm dark:prose-invert max-w-none">
-                {topic.content.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="text-foreground leading-relaxed mb-4">
+                {topic.content.split("\n\n").map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="text-foreground leading-relaxed mb-4"
+                  >
                     {paragraph}
                   </p>
                 ))}
@@ -113,5 +126,5 @@ export function TopicDetailModal({ isOpen, onClose, topic }: TopicDetailModalPro
         </>
       )}
     </AnimatePresence>
-  )
+  );
 }

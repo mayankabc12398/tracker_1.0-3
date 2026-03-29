@@ -1,14 +1,4 @@
-import { motion } from 'framer-motion'
-import type { LucideIcon } from 'lucide-react'
-import type { ReactNode } from 'react'
-
-interface SettingsCardProps {
-  icon: LucideIcon
-  title: string
-  description: string
-  children: ReactNode
-  delay?: number
-}
+import { motion } from "framer-motion";
 
 export function SettingsCard({
   icon: Icon,
@@ -16,7 +6,7 @@ export function SettingsCard({
   description,
   children,
   delay = 0,
-}: SettingsCardProps) {
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -35,5 +25,5 @@ export function SettingsCard({
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

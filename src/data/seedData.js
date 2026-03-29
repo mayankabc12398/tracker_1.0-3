@@ -1,93 +1,91 @@
-import type { Habit, Topic, Settings } from '../types'
+const today = new Date().toISOString().split("T")[0];
+const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+const twoDaysAgo = new Date(Date.now() - 172800000).toISOString().split("T")[0];
 
-const today = new Date().toISOString().split('T')[0]
-const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0]
-const twoDaysAgo = new Date(Date.now() - 172800000).toISOString().split('T')[0]
-
-export const seedHabits: Habit[] = [
+export const seedHabits = [
   {
-    id: '1',
-    name: 'Morning Meditation',
-    category: 'Wellness',
-    frequency: 'daily',
-    color: '#8b5cf6',
-    icon: 'brain',
+    id: "1",
+    name: "Morning Meditation",
+    category: "Wellness",
+    frequency: "daily",
+    color: "#8b5cf6",
+    icon: "brain",
     completedToday: true,
     streak: 12,
     completedDates: [today, yesterday, twoDaysAgo],
-    createdAt: '2024-01-15T08:00:00.000Z',
+    createdAt: "2024-01-15T08:00:00.000Z",
   },
   {
-    id: '2',
-    name: 'Read 30 Minutes',
-    category: 'Learning',
-    frequency: 'daily',
-    color: '#3b82f6',
-    icon: 'book-open',
+    id: "2",
+    name: "Read 30 Minutes",
+    category: "Learning",
+    frequency: "daily",
+    color: "#3b82f6",
+    icon: "book-open",
     completedToday: false,
     streak: 8,
     completedDates: [yesterday, twoDaysAgo],
-    createdAt: '2024-01-20T09:00:00.000Z',
+    createdAt: "2024-01-20T09:00:00.000Z",
   },
   {
-    id: '3',
-    name: 'Exercise',
-    category: 'Fitness',
-    frequency: 'daily',
-    color: '#10b981',
-    icon: 'dumbbell',
+    id: "3",
+    name: "Exercise",
+    category: "Fitness",
+    frequency: "daily",
+    color: "#10b981",
+    icon: "dumbbell",
     completedToday: true,
     streak: 15,
     completedDates: [today, yesterday, twoDaysAgo],
-    createdAt: '2024-01-10T07:00:00.000Z',
+    createdAt: "2024-01-10T07:00:00.000Z",
   },
   {
-    id: '4',
-    name: 'Drink 8 Glasses of Water',
-    category: 'Health',
-    frequency: 'daily',
-    color: '#06b6d4',
-    icon: 'droplet',
+    id: "4",
+    name: "Drink 8 Glasses of Water",
+    category: "Health",
+    frequency: "daily",
+    color: "#06b6d4",
+    icon: "droplet",
     completedToday: true,
     streak: 20,
     completedDates: [today, yesterday, twoDaysAgo],
-    createdAt: '2024-01-05T06:00:00.000Z',
+    createdAt: "2024-01-05T06:00:00.000Z",
   },
   {
-    id: '5',
-    name: 'Practice Coding',
-    category: 'Learning',
-    frequency: 'daily',
-    color: '#f59e0b',
-    icon: 'code',
+    id: "5",
+    name: "Practice Coding",
+    category: "Learning",
+    frequency: "daily",
+    color: "#f59e0b",
+    icon: "code",
     completedToday: false,
     streak: 5,
     completedDates: [yesterday],
-    createdAt: '2024-02-01T10:00:00.000Z',
+    createdAt: "2024-02-01T10:00:00.000Z",
   },
   {
-    id: '6',
-    name: 'Weekly Review',
-    category: 'Productivity',
-    frequency: 'weekly',
-    color: '#ec4899',
-    icon: 'clipboard-check',
+    id: "6",
+    name: "Weekly Review",
+    category: "Productivity",
+    frequency: "weekly",
+    color: "#ec4899",
+    icon: "clipboard-check",
     completedToday: false,
     streak: 4,
     completedDates: [],
-    createdAt: '2024-01-25T11:00:00.000Z',
+    createdAt: "2024-01-25T11:00:00.000Z",
   },
-]
+];
 
-export const seedTopics: Topic[] = [
+export const seedTopics = [
   {
-    id: '1',
-    name: 'Building Consistent Habits',
-    category: 'Self Improvement',
-    difficulty: 'Beginner',
-    status: 'Active',
-    updatedAt: '2024-03-15',
-    description: 'Learn the fundamentals of habit formation and consistency.',
+    id: "1",
+    name: "Building Consistent Habits",
+    category: "Self Improvement",
+    difficulty: "Beginner",
+    status: "Active",
+    updatedAt: "2024-03-15",
+    description: "Learn the fundamentals of habit formation and consistency.",
     content: `Building consistent habits is the foundation of personal growth and success. This guide covers the essential principles of habit formation, including the habit loop (cue, routine, reward), the importance of starting small, and strategies for maintaining consistency over time.
 
 Key Principles:
@@ -102,13 +100,13 @@ The science shows that it takes an average of 66 days to form a new habit. Durin
 Remember: Habits are the compound interest of self-improvement. Small, daily improvements lead to remarkable long-term results.`,
   },
   {
-    id: '2',
-    name: 'The Science of Habit Loops',
-    category: 'Psychology',
-    difficulty: 'Intermediate',
-    status: 'Active',
-    updatedAt: '2024-03-12',
-    description: 'Understanding the neurological patterns behind habits.',
+    id: "2",
+    name: "The Science of Habit Loops",
+    category: "Psychology",
+    difficulty: "Intermediate",
+    status: "Active",
+    updatedAt: "2024-03-12",
+    description: "Understanding the neurological patterns behind habits.",
     content: `The habit loop is a neurological pattern that governs any habit. Understanding this loop is crucial for both building good habits and breaking bad ones.
 
 The Three Components:
@@ -126,13 +124,13 @@ To change a habit:
 Advanced techniques include implementation intentions ("When X happens, I will do Y") and temptation bundling (pairing something you need to do with something you want to do).`,
   },
   {
-    id: '3',
-    name: 'Habit Stacking Techniques',
-    category: 'Productivity',
-    difficulty: 'Beginner',
-    status: 'Active',
-    updatedAt: '2024-03-10',
-    description: 'Link new habits to existing routines for better success.',
+    id: "3",
+    name: "Habit Stacking Techniques",
+    category: "Productivity",
+    difficulty: "Beginner",
+    status: "Active",
+    updatedAt: "2024-03-10",
+    description: "Link new habits to existing routines for better success.",
     content: `Habit stacking is one of the most effective strategies for building new habits. The concept is simple: link a new habit to an existing one.
 
 The Formula:
@@ -158,13 +156,13 @@ Tips for Success:
 - Start with small habits before building complex stacks`,
   },
   {
-    id: '4',
-    name: 'Breaking Bad Habits',
-    category: 'Self Improvement',
-    difficulty: 'Advanced',
-    status: 'Active',
-    updatedAt: '2024-03-08',
-    description: 'Strategies for eliminating unwanted behaviors.',
+    id: "4",
+    name: "Breaking Bad Habits",
+    category: "Self Improvement",
+    difficulty: "Advanced",
+    status: "Active",
+    updatedAt: "2024-03-08",
+    description: "Strategies for eliminating unwanted behaviors.",
     content: `Breaking bad habits requires a different approach than building good ones. You must address the root cause while making the behavior harder to perform.
 
 The Four Laws of Behavior Change (Inverted):
@@ -195,13 +193,13 @@ Common triggers include stress, boredom, social situations, and certain location
 Remember: You don't eliminate bad habits; you replace them. Every behavior serves a purpose—find healthier ways to meet those needs.`,
   },
   {
-    id: '5',
-    name: 'Morning Routine Mastery',
-    category: 'Productivity',
-    difficulty: 'Intermediate',
-    status: 'Active',
-    updatedAt: '2024-03-05',
-    description: 'Design a powerful morning routine for peak performance.',
+    id: "5",
+    name: "Morning Routine Mastery",
+    category: "Productivity",
+    difficulty: "Intermediate",
+    status: "Active",
+    updatedAt: "2024-03-05",
+    description: "Design a powerful morning routine for peak performance.",
     content: `Your morning routine sets the tone for the entire day. A well-designed morning routine can increase productivity, reduce stress, and improve overall well-being.
 
 Core Components:
@@ -242,13 +240,13 @@ Sample Routine (60 minutes):
 Customize your routine based on your goals and lifestyle. The best routine is one you can stick to consistently.`,
   },
   {
-    id: '6',
-    name: 'Tracking and Measuring Progress',
-    category: 'Analytics',
-    difficulty: 'Beginner',
-    status: 'Active',
-    updatedAt: '2024-03-01',
-    description: 'How to effectively track habits and measure improvement.',
+    id: "6",
+    name: "Tracking and Measuring Progress",
+    category: "Analytics",
+    difficulty: "Beginner",
+    status: "Active",
+    updatedAt: "2024-03-01",
+    description: "How to effectively track habits and measure improvement.",
     content: `What gets measured gets managed. Tracking your habits provides motivation, accountability, and valuable insights into your behavior patterns.
 
 Benefits of Habit Tracking:
@@ -290,10 +288,10 @@ Metrics That Matter:
 - Total days completed
 - Consistency over time`,
   },
-]
+];
 
-export const defaultSettings: Settings = {
+export const defaultSettings = {
   notifications: true,
-  reminderTime: '09:00',
-  weekStartsOn: 'monday',
-}
+  reminderTime: "09:00",
+  weekStartsOn: "monday",
+};

@@ -1,14 +1,6 @@
-import { motion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { motion } from "framer-motion";
 
-interface ChartCardProps {
-  title: string
-  subtitle?: string
-  children: ReactNode
-  delay?: number
-}
-
-export function ChartCard({ title, subtitle, children, delay = 0 }: ChartCardProps) {
+export function ChartCard({ title, subtitle, children, delay = 0 }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -24,5 +16,5 @@ export function ChartCard({ title, subtitle, children, delay = 0 }: ChartCardPro
       </div>
       <div className="w-full">{children}</div>
     </motion.div>
-  )
+  );
 }

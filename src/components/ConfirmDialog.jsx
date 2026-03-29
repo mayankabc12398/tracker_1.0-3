@@ -1,13 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { AlertTriangle } from 'lucide-react'
-
-interface ConfirmDialogProps {
-  isOpen: boolean
-  onClose: () => void
-  onConfirm: () => void
-  title: string
-  description: string
-}
+import { motion, AnimatePresence } from "framer-motion";
+import { AlertTriangle } from "lucide-react";
 
 export function ConfirmDialog({
   isOpen,
@@ -15,7 +7,7 @@ export function ConfirmDialog({
   onConfirm,
   title,
   description,
-}: ConfirmDialogProps) {
+}) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -27,6 +19,7 @@ export function ConfirmDialog({
             className="fixed inset-0 z-50 bg-black/50"
             onClick={onClose}
           />
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -37,8 +30,12 @@ export function ConfirmDialog({
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-destructive/10 mb-4">
                 <AlertTriangle className="h-6 w-6 text-destructive" />
               </div>
-              <h2 className="text-lg font-semibold text-foreground mb-2">{title}</h2>
-              <p className="text-sm text-muted-foreground mb-6">{description}</p>
+              <h2 className="text-lg font-semibold text-foreground mb-2">
+                {title}
+              </h2>
+              <p className="text-sm text-muted-foreground mb-6">
+                {description}
+              </p>
               <div className="flex w-full gap-3">
                 <button
                   onClick={onClose}
@@ -48,8 +45,8 @@ export function ConfirmDialog({
                 </button>
                 <button
                   onClick={() => {
-                    onConfirm()
-                    onClose()
+                    onConfirm();
+                    onClose();
                   }}
                   className="flex-1 px-4 py-2.5 rounded-lg bg-destructive text-destructive-foreground font-medium hover:bg-destructive/90 transition-colors"
                 >
@@ -61,5 +58,5 @@ export function ConfirmDialog({
         </>
       )}
     </AnimatePresence>
-  )
+  );
 }

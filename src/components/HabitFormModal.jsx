@@ -1,63 +1,76 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { X, Brain, BookOpen, Dumbbell, Droplet, Code, ClipboardCheck } from 'lucide-react'
-import type { Habit } from '../types'
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  X,
+  Brain,
+  BookOpen,
+  Dumbbell,
+  Droplet,
+  Code,
+  ClipboardCheck,
+} from "lucide-react";
 
-interface HabitFormModalProps {
-  isOpen: boolean
-  onClose: () => void
-  onSubmit: (habit: Omit<Habit, 'id' | 'createdAt' | 'completedDates' | 'completedToday' | 'streak'>) => void
-  initialData?: Habit | null
-}
-
-const categories = ['Wellness', 'Learning', 'Fitness', 'Health', 'Productivity', 'Other']
-const frequencies = ['daily', 'weekly', 'monthly'] as const
-const colors = ['#8b5cf6', '#3b82f6', '#10b981', '#06b6d4', '#f59e0b', '#ec4899']
+const categories = [
+  "Wellness",
+  "Learning",
+  "Fitness",
+  "Health",
+  "Productivity",
+  "Other",
+];
+const frequencies = ["daily", "weekly", "monthly"];
+const colors = [
+  "#8b5cf6",
+  "#3b82f6",
+  "#10b981",
+  "#06b6d4",
+  "#f59e0b",
+  "#ec4899",
+];
 const icons = [
-  { id: 'brain', Icon: Brain, label: 'Brain' },
-  { id: 'book-open', Icon: BookOpen, label: 'Book' },
-  { id: 'dumbbell', Icon: Dumbbell, label: 'Fitness' },
-  { id: 'droplet', Icon: Droplet, label: 'Water' },
-  { id: 'code', Icon: Code, label: 'Code' },
-  { id: 'clipboard-check', Icon: ClipboardCheck, label: 'Tasks' },
-]
+  { id: "brain", Icon: Brain, label: "Brain" },
+  { id: "book-open", Icon: BookOpen, label: "Book" },
+  { id: "dumbbell", Icon: Dumbbell, label: "Fitness" },
+  { id: "droplet", Icon: Droplet, label: "Water" },
+  { id: "code", Icon: Code, label: "Code" },
+  { id: "clipboard-check", Icon: ClipboardCheck, label: "Tasks" },
+];
 
-export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }: HabitFormModalProps) {
-  const [name, setName] = useState('')
-  const [category, setCategory] = useState(categories[0])
-  const [frequency, setFrequency] = useState<typeof frequencies[number]>('daily')
-  const [color, setColor] = useState(colors[0])
-  const [icon, setIcon] = useState(icons[0].id)
-  const [errors, setErrors] = useState<{ name?: string }>({})
+export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }) {
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState(categories[0]);
+  const [frequency, setFrequency] = useState("daily");
+  const [color, setColor] = useState(colors[0]);
+  const [icon, setIcon] = useState(icons[0].id);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (initialData) {
-      setName(initialData.name)
-      setCategory(initialData.category)
-      setFrequency(initialData.frequency)
-      setColor(initialData.color)
-      setIcon(initialData.icon)
+      setName(initialData.name);
+      setCategory(initialData.category);
+      setFrequency(initialData.frequency);
+      setColor(initialData.color);
+      setIcon(initialData.icon);
     } else {
-      setName('')
-      setCategory(categories[0])
-      setFrequency('daily')
-      setColor(colors[0])
-      setIcon(icons[0].id)
+      setName("");
+      setCategory(categories[0]);
+      setFrequency("daily");
+      setColor(colors[0]);
+      setIcon(icons[0].id);
     }
-    setErrors({})
-  }, [initialData, isOpen])
+    setErrors({});
+  }, [initialData, isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (!name.trim()) {
-      setErrors({ name: 'Habit name is required' })
-      return
+      setErrors({ name: "Habit name is required" });
+      return;
     }
 
-    onSubmit({ name: name.trim(), category, frequency, color, icon })
-    onClose()
-  }
+    onSubmit({ name: name.trim(), category, frequency, color, icon });
+    onClose();
+  };
 
   return (
     <AnimatePresence>
@@ -70,16 +83,17 @@ export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }: Habit
             className="fixed inset-0 z-50 bg-black/50"
             onClick={onClose}
           />
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="fixed inset-x-4 top-[10%] z-50 mx-auto max-w-md rounded-xl border border-border bg-card shadow-xl"
           >
             <div className="flex items-center justify-between p-4 border-b border-border">
               <h2 className="text-lg font-semibold text-foreground">
-                {initialData ? 'Edit Habit' : 'New Habit'}
+                {initialData ? "Edit Habit" : "New Habit"}
               </h2>
               <button
                 onClick={onClose}
@@ -102,6 +116,7 @@ export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }: Habit
                   placeholder="e.g., Morning Meditation"
                   className="w-full px-3 py-2 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
+
                 {errors.name && (
                   <p className="mt-1 text-sm text-destructive">{errors.name}</p>
                 )}
@@ -138,8 +153,8 @@ export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }: Habit
                       onClick={() => setFrequency(freq)}
                       className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${
                         frequency === freq
-                          ? 'bg-primary text-primary-foreground'
-                          : 'bg-muted text-muted-foreground hover:text-foreground'
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground hover:text-foreground"
                       }`}
                     >
                       {freq}
@@ -160,7 +175,9 @@ export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }: Habit
                       type="button"
                       onClick={() => setColor(c)}
                       className={`h-8 w-8 rounded-full transition-transform hover:scale-110 ${
-                        color === c ? 'ring-2 ring-offset-2 ring-offset-background ring-foreground' : ''
+                        color === c
+                          ? "ring-2 ring-offset-2 ring-offset-background ring-foreground"
+                          : ""
                       }`}
                       style={{ backgroundColor: c }}
                     />
@@ -181,8 +198,8 @@ export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }: Habit
                       onClick={() => setIcon(id)}
                       className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
                         icon === id
-                          ? 'bg-primary text-primary-foreground'
-                          : 'bg-muted text-muted-foreground hover:text-foreground'
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground hover:text-foreground"
                       }`}
                     >
                       <Icon className="h-5 w-5" />
@@ -204,7 +221,7 @@ export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }: Habit
                   type="submit"
                   className="flex-1 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
                 >
-                  {initialData ? 'Save Changes' : 'Create Habit'}
+                  {initialData ? "Save Changes" : "Create Habit"}
                 </button>
               </div>
             </form>
@@ -212,5 +229,5 @@ export function HabitFormModal({ isOpen, onClose, onSubmit, initialData }: Habit
         </>
       )}
     </AnimatePresence>
-  )
+  );
 }

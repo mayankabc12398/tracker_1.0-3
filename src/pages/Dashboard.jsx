@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 import {
   BarChart,
   Bar,
@@ -12,7 +12,7 @@ import {
   PieChart,
   Pie,
   Cell,
-} from 'recharts'
+} from "recharts";
 import {
   Target,
   CheckCircle2,
@@ -20,11 +20,11 @@ import {
   Flame,
   Activity,
   Calendar,
-} from 'lucide-react'
-import { useHabits } from '../context/HabitContext'
-import { StatCard } from '../components/StatCard'
-import { ProgressRing } from '../components/ProgressRing'
-import { ChartCard } from '../components/ChartCard'
+} from "lucide-react";
+import { useHabits } from "../context/HabitContext";
+import { StatCard } from "../components/StatCard";
+import { ProgressRing } from "../components/ProgressRing";
+import { ChartCard } from "../components/ChartCard";
 
 export default function Dashboard() {
   const {
@@ -34,26 +34,26 @@ export default function Dashboard() {
     getCompletionPercentage,
     getLongestStreak,
     getWeeklyData,
-  } = useHabits()
+  } = useHabits();
 
-  const weeklyData = getWeeklyData()
-  const completionPercentage = getCompletionPercentage()
-  const completedToday = getCompletedToday()
-  const totalHabits = getTotalHabits()
-  const longestStreak = getLongestStreak()
+  const weeklyData = getWeeklyData();
+  const completionPercentage = getCompletionPercentage();
+  const completedToday = getCompletedToday();
+  const totalHabits = getTotalHabits();
+  const longestStreak = getLongestStreak();
 
   // Category breakdown data
   const categoryData = habits.reduce((acc, habit) => {
-    const existing = acc.find((item) => item.name === habit.category)
+    const existing = acc.find((item) => item.name === habit.category);
     if (existing) {
-      existing.value++
+      existing.value++;
     } else {
-      acc.push({ name: habit.category, value: 1 })
+      acc.push({ name: habit.category, value: 1 });
     }
-    return acc
-  }, [] as { name: string; value: number }[])
+    return acc;
+  }, []);
 
-  const COLORS = ['#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#ec4899']
+  const COLORS = ["#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#ec4899"];
 
   // Recent activity
   const recentActivity = habits
@@ -63,15 +63,15 @@ export default function Dashboard() {
       name: h.name,
       category: h.category,
       streak: h.streak,
-    }))
+    }));
 
   // Monthly trend data (simulated)
   const monthlyTrend = [
-    { week: 'Week 1', completion: 65 },
-    { week: 'Week 2', completion: 72 },
-    { week: 'Week 3', completion: 68 },
-    { week: 'Week 4', completion: completionPercentage || 75 },
-  ]
+    { week: "Week 1", completion: 65 },
+    { week: "Week 2", completion: 72 },
+    { week: "Week 3", completion: 68 },
+    { week: "Week 4", completion: completionPercentage || 75 },
+  ];
 
   return (
     <div className="space-y-6">
@@ -85,6 +85,7 @@ export default function Dashboard() {
           variant="primary"
           delay={0}
         />
+
         <StatCard
           title="Completed Today"
           value={completedToday}
@@ -94,6 +95,7 @@ export default function Dashboard() {
           trend={{ value: 12, isPositive: true }}
           delay={0.1}
         />
+
         <StatCard
           title="Completion Rate"
           value={`${completionPercentage}%`}
@@ -102,6 +104,7 @@ export default function Dashboard() {
           variant="info"
           delay={0.2}
         />
+
         <StatCard
           title="Best Streak"
           value={longestStreak}
@@ -123,28 +126,34 @@ export default function Dashboard() {
           <div className="h-[240px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={weeklyData}>
-                <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  className="stroke-border"
+                />
                 <XAxis
                   dataKey="day"
-                  tick={{ fill: 'currentColor', fontSize: 12 }}
+                  tick={{ fill: "currentColor", fontSize: 12 }}
                   className="text-muted-foreground"
-                  axisLine={{ stroke: 'currentColor' }}
-                  tickLine={{ stroke: 'currentColor' }}
+                  axisLine={{ stroke: "currentColor" }}
+                  tickLine={{ stroke: "currentColor" }}
                 />
+
                 <YAxis
-                  tick={{ fill: 'currentColor', fontSize: 12 }}
+                  tick={{ fill: "currentColor", fontSize: 12 }}
                   className="text-muted-foreground"
-                  axisLine={{ stroke: 'currentColor' }}
-                  tickLine={{ stroke: 'currentColor' }}
+                  axisLine={{ stroke: "currentColor" }}
+                  tickLine={{ stroke: "currentColor" }}
                 />
+
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '8px',
-                    color: 'hsl(var(--foreground))',
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "8px",
+                    color: "hsl(var(--foreground))",
                   }}
                 />
+
                 <Bar
                   dataKey="completed"
                   fill="hsl(var(--primary))"
@@ -165,7 +174,11 @@ export default function Dashboard() {
           <h3 className="text-base font-semibold text-foreground mb-4">
             Today's Progress
           </h3>
-          <ProgressRing progress={completionPercentage} size={160} strokeWidth={12} />
+          <ProgressRing
+            progress={completionPercentage}
+            size={160}
+            strokeWidth={12}
+          />
           <p className="mt-4 text-sm text-muted-foreground">
             {completedToday} of {totalHabits} habits completed
           </p>
@@ -198,10 +211,10 @@ export default function Dashboard() {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '8px',
-                    color: 'hsl(var(--foreground))',
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "8px",
+                    color: "hsl(var(--foreground))",
                   }}
                 />
               </PieChart>
@@ -213,7 +226,10 @@ export default function Dashboard() {
                     className="h-2.5 w-2.5 rounded-full"
                     style={{ backgroundColor: COLORS[index % COLORS.length] }}
                   />
-                  <span className="text-xs text-muted-foreground">{item.name}</span>
+
+                  <span className="text-xs text-muted-foreground">
+                    {item.name}
+                  </span>
                 </div>
               ))}
             </div>
@@ -233,12 +249,19 @@ export default function Dashboard() {
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={monthlyTrend}>
                 <defs>
-                  <linearGradient id="colorCompletion" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient
+                    id="colorCompletion"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
                     <stop
                       offset="5%"
                       stopColor="hsl(var(--primary))"
                       stopOpacity={0.3}
                     />
+
                     <stop
                       offset="95%"
                       stopColor="hsl(var(--primary))"
@@ -246,25 +269,31 @@ export default function Dashboard() {
                     />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  className="stroke-border"
+                />
                 <XAxis
                   dataKey="week"
-                  tick={{ fill: 'currentColor', fontSize: 12 }}
+                  tick={{ fill: "currentColor", fontSize: 12 }}
                   className="text-muted-foreground"
                 />
+
                 <YAxis
-                  tick={{ fill: 'currentColor', fontSize: 12 }}
+                  tick={{ fill: "currentColor", fontSize: 12 }}
                   className="text-muted-foreground"
                   domain={[0, 100]}
                 />
+
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '8px',
-                    color: 'hsl(var(--foreground))',
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "8px",
+                    color: "hsl(var(--foreground))",
                   }}
                 />
+
                 <Area
                   type="monotone"
                   dataKey="completion"
@@ -323,7 +352,9 @@ export default function Dashboard() {
                   </div>
                   <div className="flex items-center gap-1 text-warning">
                     <Flame className="h-4 w-4" />
-                    <span className="text-sm font-medium">{activity.streak}</span>
+                    <span className="text-sm font-medium">
+                      {activity.streak}
+                    </span>
                   </div>
                 </motion.div>
               ))}
@@ -342,5 +373,5 @@ export default function Dashboard() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
