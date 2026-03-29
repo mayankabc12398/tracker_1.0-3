@@ -2,6 +2,8 @@ const today = new Date().toISOString().split("T")[0];
 const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
 const twoDaysAgo = new Date(Date.now() - 172800000).toISOString().split("T")[0];
 
+import DOMComponent from '../pages/Topics/ReactJS/DOM.jsx';
+
 export const seedHabits = [
   {
     id: "1",
@@ -78,6 +80,16 @@ export const seedHabits = [
 ];
 
 export const seedTopics = [
+  {
+    id: "react-dom",
+    name: "Real DOM & Virtual DOM",
+    category: "ReactJS",
+    difficulty: "Beginner",
+    status: "Active",
+    updatedAt: today,
+    description: "Understanding the difference between Real DOM and Virtual DOM in React.",
+    content: DOMComponent,
+  },
   {
     id: "1",
     name: "Building Consistent Habits",

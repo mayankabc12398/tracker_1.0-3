@@ -137,6 +137,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
@@ -167,4 +168,74 @@
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: oklch(0.45 0.02 260);
+}
+
+
+
+
+
+
+/* Real DOM topic styles */
+.real-dom-page {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 260ms ease, transform 260ms ease;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem 2rem;
+}
+
+.real-dom-page.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.real-dom-header h1 {
+  margin: 0 0 0.35rem;
+  font-size: 2rem;
+}
+
+.real-dom-lead {
+  margin: 0 0 1.4rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+.real-dom-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  padding: 1.25rem 1.2rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.07);
+  border: 1px solid rgba(148, 163, 184, 0.23);
+  animation: fadeInOverlay 360ms ease-out;
+}
+
+.real-dom-card.highlight {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.real-dom-card h2 {
+  margin-top: 0;
+}
+
+.code-block {
+  background: rgba(15, 23, 42, 0.06);
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.93rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+
+.important {
+  background: rgba(253, 224, 71, 0.12);
+  border-left: 4px solid rgba(245, 158, 11, 0.9);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  margin-top: 0.9rem;
+  color: #92400e;
 }

@@ -17,6 +17,8 @@ const statusColors = {
 export function TopicDetailModal({ isOpen, onClose, topic }) {
   if (!topic) return null;
 
+  const ContentComponent = typeof topic.content === 'function' || typeof topic.content === 'object' ? topic.content : null;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -37,7 +39,7 @@ export function TopicDetailModal({ isOpen, onClose, topic }) {
             className="fixed inset-x-4 top-[5%] bottom-[5%] z-50 mx-auto max-w-2xl rounded-xl border border-border bg-card shadow-xl overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-start justify-between p-5 border-b border-border">
+            <div className="flex items-start justify-between p-2 border-b border-border">
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                   <BookOpen className="h-6 w-6 text-primary" />
@@ -60,7 +62,7 @@ export function TopicDetailModal({ isOpen, onClose, topic }) {
             </div>
 
             {/* Meta Info */}
-            <div className="flex flex-wrap gap-4 px-5 py-4 border-b border-border bg-muted/30">
+            <div className="flex flex-wrap gap-4 px-5 py-2 border-b border-border bg-muted/30">
               <div className="flex items-center gap-2">
                 <Tag className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">Category:</span>
@@ -102,14 +104,18 @@ export function TopicDetailModal({ isOpen, onClose, topic }) {
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-5">
               <div className="prose prose-sm dark:prose-invert max-w-none">
-                {topic.content.split("\n\n").map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className="text-foreground leading-relaxed mb-4"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
+                {typeof topic.content === 'string' ? (
+                  topic.content.split("\n\n").map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-foreground leading-relaxed mb-4"
+                    >
+                      {paragraph}
+                    </p>
+                  ))
+                ) : ContentComponent ? (
+                  <ContentComponent />
+                ) : null}
               </div>
             </div>
 
