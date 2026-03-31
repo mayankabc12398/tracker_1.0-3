@@ -120,14 +120,14 @@ export function TopicDetailModal({ isOpen, onClose, topic }) {
             </div>
 
             {/* Footer */}
-            <div className="p-4 border-t border-border">
+            {/* <div className="p-4 border-t border-border">
               <button
                 onClick={onClose}
                 className="w-full px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
               >
                 Close
               </button>
-            </div>
+            </div> */}
           </motion.div>
         </>
       )}

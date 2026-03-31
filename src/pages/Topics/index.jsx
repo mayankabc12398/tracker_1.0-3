@@ -26,7 +26,7 @@ const mockTopics = [
     description: 'Understanding the structure and manipulation of the DOM is crucial for effective web development.',
     created: 'Jan 25, 2026',
     status: 'done',
-    Details: <DOM/>,
+    Details: <DOM />,
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const mockTopics = [
     description: 'React का reconciliation process कैसे काम करता है और यह performance को कैसे optimize करता है।',
     created: 'March 11, 2026',
     status: "done",
-    Details: <Reconciliation/>,
+    Details: <Reconciliation />,
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const mockTopics = [
     description: 'React का diffing algorithm कैसे काम करता है और यह कैसे determine करता है कि कौन से components को update करना है।',
     created: 'March 11, 2026',
     status: 'done',
-    Details: <ReactDiffingAlgorithm/>,
+    Details: <ReactDiffingAlgorithm />,
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const mockTopics = [
     description: 'Understanding the React Fiber architecture and how it enables efficient rendering and updates.',
     created: 'March 11, 2026',
     status: "pending",
-    Details: <ReactFiberArchitecture/>,
+    Details: <ReactFiberArchitecture />,
   },
   {
     id: 5,
@@ -58,7 +58,7 @@ const mockTopics = [
     description: 'React का rendering process कैसे काम करता है और यह कैसे optimize किया जाता है।',
     created: 'March 11, 2026',
     status: "pending",
-    Details: <ReactRenderingProcess/>,
+    Details: <ReactRenderingProcess />,
   },
   {
     id: 6,
@@ -66,7 +66,7 @@ const mockTopics = [
     description: 'React useEffect hook का उपयोग कैसे करें और यह component lifecycle के साथ कैसे interact करता है।',
     created: 'March 11, 2026',
     status: "pending",
-    Details: <ReactuseEffect/>,
+    Details: <ReactuseEffect />,
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ const mockTopics = [
     description: 'Deep dive into memoization hooks and when to use each of them.',
     created: 'March 12, 2026',
     status: "pending",
-    Details: <ReactMemoHooks/>,
+    Details: <ReactMemoHooks />,
   },
   {
     id: 8,
@@ -82,7 +82,7 @@ const mockTopics = [
     description: 'Important',
     created: 'March 23, 2026',
     status: "pending",
-    Details: <ImpTopic/>,
+    Details: <ImpTopic />,
   },
   {
     id: 9,
@@ -90,7 +90,7 @@ const mockTopics = [
     description: 'React Rerender Stepper',
     created: 'March 23, 2026',
     status: "pending",
-    Details: <ReactRerenderStepper/>,
+    Details: <ReactRerenderStepper />,
   },
 ]
 

@@ -13,6 +13,10 @@ import ReactuseEffectComponent from '../pages/Topics/ReactJS/ReactuseEffect.jsx'
 import ReconciliationComponent from '../pages/Topics/ReactJS/Reconciliation.jsx';
 import ConverdTopicComponent from '../pages/Topics/ReactJS/converdTopic.jsx';
 
+import JSEngineInternalsComponent from '../pages/Topics/EngineInternals/JSEngineInternals.jsx';
+import BrowserRenderingComponent from '../pages/Topics/EngineInternals/BrowserRendering.jsx';
+import ReactInternalsComponent from '../pages/Topics/EngineInternals/ReactInternals.jsx';
+
 export const seedHabits = [
   {
     id: "1",
@@ -189,7 +193,36 @@ export const seedTopics = [
     description: "A summary or additional covered React topics.",
     content: ConverdTopicComponent,
   },
-
+  {
+    id: "engine-js-v8",
+    name: "JavaScript Engine Internals",
+    category: "Engine Internals",
+    difficulty: "Advanced",
+    status: "Active",
+    updatedAt: today,
+    description: "How JavaScript goes from human-readable code to machine execution in milliseconds.",
+    content: JSEngineInternalsComponent,
+  },
+  {
+    id: "engine-browser-render",
+    name: "Browser Rendering Pipeline",
+    category: "Engine Internals",
+    difficulty: "Advanced",
+    status: "Active",
+    updatedAt: today,
+    description: "The Critical Rendering Path (CRP): How pixels actually get painted to the screen.",
+    content: BrowserRenderingComponent,
+  },
+  {
+    id: "engine-react-internals",
+    name: "React Internals Foundation",
+    category: "Engine Internals",
+    difficulty: "Advanced",
+    status: "Active",
+    updatedAt: today,
+    description: "The core architecture: Scheduler, Reconciler, and Renderer.",
+    content: ReactInternalsComponent,
+  },
 ];
 
 export const defaultSettings = {

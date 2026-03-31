@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Eye, BookOpen } from "lucide-react";
 import { seedTopics } from "../data/seedData";
 import { SearchInput } from "../components/SearchInput";
+import { CustomSelect } from "../components/CustomSelect";
 import { EmptyState } from "../components/EmptyState";
 import { TopicDetailModal } from "../components/TopicDetailModal";
 import { cn } from "../lib/utils";
@@ -21,16 +22,26 @@ const statusColors = {
 
 export default function Topics() {
   const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("ReactJS");
   const [selectedTopic, setSelectedTopic] = useState(null);
 
+  const categories = useMemo(() => {
+    const cats = new Set(seedTopics.map(t => t.category));
+    return ["All", ...Array.from(cats)].sort();
+  }, []);
+
   const filteredTopics = useMemo(() => {
-    return seedTopics.filter(
-      (topic) =>
+    return seedTopics.filter((topic) => {
+      const matchesSearch =
         topic.name.toLowerCase().includes(search.toLowerCase()) ||
         topic.category.toLowerCase().includes(search.toLowerCase()) ||
-        topic.difficulty.toLowerCase().includes(search.toLowerCase()),
-    );
-  }, [search]);
+        topic.difficulty.toLowerCase().includes(search.toLowerCase());
+
+      const matchesCategory = selectedCategory === "All" || topic.category === selectedCategory;
+
+      return matchesSearch && matchesCategory;
+    });
+  }, [search, selectedCategory]);
 
   return (
     <div className="space-y-6">
@@ -38,16 +49,26 @@ export default function Topics() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <p className="text-muted-foreground">
-            {seedTopics.length} topic{seedTopics.length !== 1 ? "s" : ""}{" "}
+            {filteredTopics.length} topic{filteredTopics.length !== 1 ? "s" : ""}{" "}
             available
           </p>
         </div>
-        <div className="w-full sm:w-72">
-          <SearchInput
-            value={search}
-            onChange={setSearch}
-            placeholder="Search topics..."
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto mt-2 sm:mt-0">
+          <CustomSelect
+            value={selectedCategory}
+            onChange={setSelectedCategory}
+            options={categories.map((cat) => ({
+              label: cat === "All" ? "All Categories" : cat,
+              value: cat
+            }))}
           />
+          <div className="w-full sm:w-72">
+            <SearchInput
+              value={search}
+              onChange={setSearch}
+              placeholder="Search topics..."
+            />
+          </div>
         </div>
       </div>
 
@@ -65,26 +86,26 @@ export default function Topics() {
           className="rounded-xl border border-border bg-card overflow-hidden"
         >
           {/* Desktop Table */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border bg-muted/50">
-                  <th className="px-5 py-3.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="hidden md:block overflow-auto max-h-[calc(100vh-240px)] custom-scrollbar">
+            <table className="w-full border-collapse relative">
+              <thead className="sticky top-0 z-10">
+                <tr className="border-b border-border bg-card/95 backdrop-blur-sm shadow-sm">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Topic
                   </th>
-                  <th className="px-5 py-3.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Category
                   </th>
-                  <th className="px-5 py-3.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Difficulty
                   </th>
-                  <th className="px-5 py-3.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-5 py-3.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Updated
                   </th>
-                  <th className="px-5 py-3.5 text-right text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -98,27 +119,27 @@ export default function Topics() {
                     transition={{ delay: index * 0.05 }}
                     className="hover:bg-muted/30 transition-colors"
                   >
-                    <td className="px-5 py-4">
+                    <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                           <BookOpen className="h-4 w-4 text-primary" />
                         </div>
                         <div>
-                          <p className="font-medium text-foreground">
+                          <p className="font-medium text-foreground text-sm">
                             {topic.name}
                           </p>
-                          <p className="text-xs text-muted-foreground truncate max-w-xs">
+                          <p className="text-xs text-muted-foreground truncate max-w-[200px] lg:max-w-xs">
                             {topic.description}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-5 py-4">
+                    <td className="px-4 py-3">
                       <span className="text-sm text-foreground">
                         {topic.category}
                       </span>
                     </td>
-                    <td className="px-5 py-4">
+                    <td className="px-4 py-3">
                       <span
                         className={cn(
                           "px-2.5 py-1 rounded-full text-xs font-medium",
@@ -128,7 +149,7 @@ export default function Topics() {
                         {topic.difficulty}
                       </span>
                     </td>
-                    <td className="px-5 py-4">
+                    <td className="px-4 py-3">
                       <span
                         className={cn(
                           "px-2.5 py-1 rounded-full text-xs font-medium",
@@ -138,15 +159,15 @@ export default function Topics() {
                         {topic.status}
                       </span>
                     </td>
-                    <td className="px-5 py-4">
+                    <td className="px-4 py-3">
                       <span className="text-sm text-muted-foreground">
                         {topic.updatedAt}
                       </span>
                     </td>
-                    <td className="px-5 py-4 text-right">
+                    <td className="px-4 py-3 text-right">
                       <button
                         onClick={() => setSelectedTopic(topic)}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors"
                       >
                         <Eye className="h-4 w-4" />
                         View
