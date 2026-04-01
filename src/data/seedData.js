@@ -2,6 +2,7 @@ const today = new Date().toISOString().split("T")[0];
 const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
 const twoDaysAgo = new Date(Date.now() - 172800000).toISOString().split("T")[0];
 
+import { javascriptData } from './javascriptData.js'
 import DOMComponent from '../pages/Topics/ReactJS/DOM.jsx';
 import ImpTopicComponent from '../pages/Topics/ReactJS/ImpTopic.jsx';
 import ReactDiffingAlgorithmComponent from '../pages/Topics/ReactJS/ReactDiffingAlgorithm.jsx';
@@ -12,18 +13,6 @@ import ReactRerenderStepperComponent from '../pages/Topics/ReactJS/ReactRerender
 import ReactuseEffectComponent from '../pages/Topics/ReactJS/ReactuseEffect.jsx';
 import ReconciliationComponent from '../pages/Topics/ReactJS/Reconciliation.jsx';
 import ConverdTopicComponent from '../pages/Topics/ReactJS/converdTopic.jsx';
-
-import BrowserRenderingComponent from '../pages/Topics/EngineInternals/BrowserRendering.jsx';
-import ReactInternalsComponent from '../pages/Topics/EngineInternals/ReactInternals.jsx';
-
-import JSEngineOverviewComponent from '../pages/Topics/Javascript/JSEngineOverview.jsx';
-import JSParsingAndJITComponent from '../pages/Topics/Javascript/JSParsingAndJIT.jsx';
-import JSExecutionContextComponent from '../pages/Topics/Javascript/JSExecutionContext.jsx';
-import HoistingComponent from '../pages/Topics/Javascript/Hoisting.jsx';
-import JSMemoryManagementComponent from '../pages/Topics/Javascript/JSMemoryManagement.jsx';
-import JSCoreConceptsComponent from '../pages/Topics/Javascript/JSCoreConcepts.jsx';
-import JSGarbageCollectionComponent from '../pages/Topics/Javascript/JSGarbageCollection.jsx';
-import JSEngineVsRuntimeComponent from '../pages/Topics/Javascript/JSEngineVsRuntime.jsx';
 
 export const seedHabits = [
   {
@@ -99,6 +88,8 @@ export const seedHabits = [
     createdAt: "2024-01-25T11:00:00.000Z",
   },
 ];
+
+// The structure should be well-organized and easy to understand, following professional UI/UX standards. Ensure proper formatting, clear section hierarchy, and consistent styling.
 
 export const seedTopics = [
   {
@@ -201,106 +192,9 @@ export const seedTopics = [
     description: "A summary or additional covered React topics.",
     content: ConverdTopicComponent,
   },
-  {
-    id: "js-engine-overview",
-    name: "What is a JavaScript Engine?",
-    category: "Engine Internals",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "The brain that converts developer code into machine execution.",
-    content: JSEngineOverviewComponent,
-  },
-  {
-    id: "js-parsing-jit",
-    name: "Parsing, AST, and JIT Compilation",
-    category: "Engine Internals",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "How modern engines process source code and compile it on the fly.",
-    content: JSParsingAndJITComponent,
-  },
-  {
-    id: "js-execution-context",
-    name: "The Execution Context",
-    category: "Advanced JavaScript",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "The fundamental environment where your JavaScript code actually runs.",
-    content: JSExecutionContextComponent,
-  },
-  {
-    id: "js-hoisting",
-    name: "Hoisting Deep-Dive",
-    category: "Advanced JavaScript",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "The most misunderstood concept of JavaScript engine execution.",
-    content: HoistingComponent,
-  },
-  {
-    id: "js-memory-mgmt",
-    name: "Call Stack vs Memory Heap",
-    category: "Advanced JavaScript",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "Where does your data and function logic perfectly reside as code triggers?",
-    content: JSMemoryManagementComponent,
-  },
-  {
-    id: "js-core-concepts",
-    name: "Scope, Lexical Env & Closures",
-    category: "Advanced JavaScript",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "The defining architectural pillars of JavaScript application logic.",
-    content: JSCoreConceptsComponent,
-  },
-  {
-    id: "js-garbage-collection",
-    name: "Garbage Collection & Optimization",
-    category: "Engine Internals",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "How modern V8 handles infinite dynamic memory loops efficiently.",
-    content: JSGarbageCollectionComponent,
-  },
-  {
-    id: "js-engine-vs-runtime",
-    name: "Engine vs Runtime Architecture",
-    category: "Architecture",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "The ultimate fundamental distinction every single advanced JavaScript developer absolutely must strictly understand.",
-    content: JSEngineVsRuntimeComponent,
-  },
-  {
-    id: "engine-browser-render",
-    name: "Browser Rendering Pipeline",
-    category: "Engine Internals",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "The Critical Rendering Path (CRP): How pixels actually get painted to the screen.",
-    content: BrowserRenderingComponent,
-  },
-  {
-    id: "engine-react-internals",
-    name: "React Internals Foundation",
-    category: "Engine Internals",
-    difficulty: "Advanced",
-    status: "Active",
-    updatedAt: today,
-    description: "The core architecture: Scheduler, Reconciler, and Renderer.",
-    content: ReactInternalsComponent,
-  },
+
+  ...javascriptData
+
 ];
 
 export const defaultSettings = {
